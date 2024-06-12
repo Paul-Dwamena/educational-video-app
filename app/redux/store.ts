@@ -2,11 +2,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import videosReducer from './slices/videoSlice';
 import commentsReducer from './slices/commentsSlice';
+import searchReducer from './slices/searchSlice';
 
 const store = configureStore({
   reducer: {
     videos: videosReducer,
     comments: commentsReducer,
+    search:searchReducer
   },
 });
 

@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add this to your CSS file */
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the modal is above other content */
+}
+
+.modal-content {
+  background-color: #fff; /* White background */
+  padding: 20px; /* Padding inside the modal */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 900px; /* Maximum width of the modal */
+  width: 100%; /* Full width up to the max-width */
+}
+
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .flex-center-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}

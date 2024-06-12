@@ -2,19 +2,23 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { Video, CreateVideoPayload } from '../../types';
 
 const user_id = process.env.NEXT_PUBLIC_USER_ID as string;
+console.log(user_id)
+
 
 interface VideosState {
     videos: Video[];
-    video: Video | null; // Add this line
+    video: Video | null; 
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
+    filteredVideos: Video[];
   }
   
   const initialState: VideosState = {
     videos: [],
-    video: null, // Initialize as null
+    video: null,
     status: 'idle',
     error: null,
+    filteredVideos: [],
   };
 
 
@@ -24,8 +28,7 @@ export const fetchVideos = createAsyncThunk<Video[]>('videos/fetchVideos', async
       throw new Error('Failed to fetch videos');
     }
     const data = await response.json();
-    // Ensure this matches the expected structure
-    return data.videos; // or adapt if the API returns a different structure
+    return data.videos; 
   });
 
   export const fetchVideoById = createAsyncThunk<Video, string>('videos/fetchVideoById', async (id) => {
@@ -53,7 +56,11 @@ export const createVideo = createAsyncThunk<Video, CreateVideoPayload>('videos/c
 const videosSlice = createSlice({
     name: 'videos',
     initialState,
-    reducers: {},
+    reducers: {
+        resetFilteredVideos(state) {
+            state.filteredVideos = state.videos; 
+          },
+    },
     extraReducers: (builder) => {
       builder
         .addCase(fetchVideos.pending, (state) => {
@@ -89,4 +96,5 @@ const videosSlice = createSlice({
     },
   });
 
+export const { resetFilteredVideos } = videosSlice.actions;
 export default videosSlice.reducer;

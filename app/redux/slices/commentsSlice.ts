@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { Comment, CreateCommentPayload, CommentApiResponse } from '../../types';
+import { Comment, CreateCommentPayload} from '../../types';
 
 export const fetchComments = createAsyncThunk<Comment[], string>('comments/fetchComments', async (videoId) => {
     const response = await fetch(`https://take-home-assessment-423502.uc.r.appspot.com/api/videos/comments?video_id=${videoId}`);
@@ -7,8 +7,7 @@ export const fetchComments = createAsyncThunk<Comment[], string>('comments/fetch
         throw new Error('Failed to fetch videos');
     }
     const data = await response.json();
-    // Ensure this matches the expected structure
-    return data.comments; // or adapt if the API returns a different structure
+    return data.comments; 
 });
 
 export const createComment = createAsyncThunk<Comment, CreateCommentPayload>('comments/createComment', async (payload) => {

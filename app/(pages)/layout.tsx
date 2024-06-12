@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import NavBar from "../components/Navbar";
+import ReduxProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className="flex flex-col min-h-screen">
+        <ReduxProvider>
+          <NavBar />
+          {children}
+        </ReduxProvider>
+      </body>
     </html>
   );
 }
